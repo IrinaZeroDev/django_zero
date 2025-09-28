@@ -1,0 +1,27 @@
+{% extends 'main/layoute.html' %}
+
+{% block title %}
+ <title>Каталог</title>
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Каталог пород</h2>
+<p>В каталоге представлены породы домашних кошек и лучшие аксессуары для ухода. Выберите категорию, чтобы узнать больше.</p>
+<!-- Здесь можно сделать таблицу или сетку с карточками пород -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for breed in breeds %}
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <img src="{{ breed.img }}" class="card-img-top" alt="{{ breed.name }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ breed.name }}</h5>
+        <p class="card-text text-secondary">
+          <b>Место происхождения:</b> {{ breed.origin }}<br>
+          <b>Описание:</b> {{ breed.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

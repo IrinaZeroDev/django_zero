@@ -1,0 +1,31 @@
+body {
+  background: #f8f9fa;
+}
+
+aside {
+  background: #fff;
+  min-width: 200px;
+  padding: 1rem;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+main {
+   padding: 1rem;
+   background: #fff;
+   border-radius: 0.3rem;
+   box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.app-sidebar {
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .app-layout {
+     display: flex;
+     gap: 1rem;
+  }
+  aside {
+    min-height: 80vh;
+  }
+}

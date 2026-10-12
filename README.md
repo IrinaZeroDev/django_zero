@@ -1,24 +1,31 @@
 # django_zero
 мои домашние задания в курсе темы "Веб-разработка с использованием Django" в курсе "Программист на Python с нуля с помощью ChatGPT"
 
-## DJ06. Архитектура Django: создание приложений и их взаимодействие
+## DJ07. Интеграция Django с телеграм-ботом
 
-### [Задание](./DJ06/mysite)
-Повторить действия за преподавателем: проект `mysite` с отдельными приложениями, связи между ними без циклических импортов, секреты в `.env`.
+### [Задание](./DJ07/djangobot)
+Выполнены все три уровня задания в одном проекте `djangobot`.
 
-Что сделано:
-- проект `mysite` (`django-admin startproject mysite`), приложения `users` и `orders` (`startapp`), оба в `INSTALLED_APPS`;
-- `users`: модель `User` на основе `AbstractUser` (уникальный email, адрес), `AUTH_USER_MODEL = 'users.User'`, страницы `login/` и `register/`;
-- `orders`: модель `Order` (товар, цена) со связью `ForeignKey` на пользователя через `settings.AUTH_USER_MODEL`, `related_name='orders'`, страница `orders/user/<id>/`, где пользователь берётся через `get_user_model()`;
-- приложения не импортируют друг друга, циклических импортов нет;
-- `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS`, `TELEGRAM_BOT_TOKEN` читаются из `.env` через `python-dotenv`; `.env` не хранится в git, образец — `.env.example`.
+**Задание 1 (лёгкий уровень).** Проект с приложением `bot`, Django REST Framework, модель `TelegramUser` (ID в Telegram и имя пользователя), сериализатор, endpoint `POST /api/register/` с JSON-ответом.
+
+**Задание 2 (средний уровень).** Telegram-бот на `telebot` (`bot_main.py`): команда `/start` передаёт в API ID и username и сообщает пользователю о регистрации.
+
+**Задание 3 (продвинутый уровень).** Endpoint `GET /api/user/<id>/`, команда бота `/myinfo`, обработка ошибок (не зарегистрирован, сервер недоступен), CORS через `django-cors-headers` со списком разрешённых доменов.
+
+Бот — отдельный клиент, а не часть Django: он обращается к API по HTTP.
+
+| Метод и адрес | Ответ |
+|---|---|
+| `POST /api/register/` `{"user_id": 123, "username": "name"}` | 201 — зарегистрирован, 200 — уже был, 400 — неверные данные |
+| `GET /api/user/<user_id>/` | 200 — данные пользователя, 404 — не найден |
 
 Запуск:
 ```
-cd DJ06/mysite
+cd DJ07/djangobot
 pip install -r requirements.txt
-copy .env.example .env      # и вписать DJANGO_SECRET_KEY
+copy .env.example .env      # вписать DJANGO_SECRET_KEY и TELEGRAM_BOT_TOKEN
 python manage.py migrate
-python manage.py runserver
+python manage.py runserver  # терминал 1
+python bot_main.py          # терминал 2
 ```
 Тесты: `python manage.py test`

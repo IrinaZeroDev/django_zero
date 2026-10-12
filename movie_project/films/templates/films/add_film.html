@@ -1,0 +1,21 @@
+{% extends 'films/base.html' %}
+
+{% block title %}<title>Добавить фильм</title>{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Добавить фильм</h1>
+
+<form method="post" class="card card-body shadow-sm" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field }}
+        {% for error in field.errors %}
+        <div class="text-danger small mt-1">{{ error }}</div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+{% endblock %}

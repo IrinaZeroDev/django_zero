@@ -37,3 +37,19 @@
 4. Обнови базу данных с помощью миграций.
 5. Отправь архив с проектом или файлы models.py, forms.py, views.py и settings.py.
 
+
+### Решение
+Выполнены все три уровня в одном проекте [`auth_test_hw`](./DJ05/auth_test_hw) (приложение `main`):
+- **уровень 1** — маршруты `index`, `profile`, `login`, `logout`, шаблоны `index.html`, `profile.html`, `login.html` и каркас `base.html` с навигацией;
+- **уровень 2** — регистрация `register.html` на основе `UserCreationForm` с переходом на страницу входа, профиль только для авторизованных (`LoginRequiredMixin`);
+- **уровень 3** — модель `CustomUser` с уникальным `email` и необязательным `phone_number`, форма регистрации с новыми полями, `AUTH_USER_MODEL = 'main.CustomUser'`, миграции.
+
+Запуск:
+```
+cd DJ05/auth_test_hw
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+Тесты: `python manage.py test main`

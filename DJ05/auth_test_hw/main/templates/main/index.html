@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Главная страница</h1>
+{% if user.is_authenticated %}
+<p class="lead">Добро пожаловать, {{ user.username }}!</p>
+<a class="btn btn-primary" href="{% url 'profile' %}">Перейти в профиль</a>
+{% else %}
+<p class="lead">Войдите или зарегистрируйтесь, чтобы открыть профиль.</p>
+<a class="btn btn-primary" href="{% url 'login' %}">Войти</a>
+<a class="btn btn-outline-primary" href="{% url 'register' %}">Регистрация</a>
+{% endif %}
+{% endblock %}

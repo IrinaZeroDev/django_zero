@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Профиль</h1>
+<div class="card shadow-sm" style="max-width: 32rem;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Логин:</b> {{ user.username }}</li>
+        <li class="list-group-item"><b>Почта:</b> {{ user.email }}</li>
+        <li class="list-group-item"><b>Телефон:</b> {{ user.phone_number|default:"не указан" }}</li>
+        <li class="list-group-item"><b>Дата регистрации:</b> {{ user.date_joined|date:"d.m.Y H:i" }}</li>
+    </ul>
+</div>
+{% endblock %}

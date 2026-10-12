@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Вход</h1>
+<form method="post" class="card card-body shadow-sm" style="max-width: 32rem;">
+    {% csrf_token %}
+    {% include 'main/_form.html' %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="btn btn-primary">Войти</button>
+</form>
+<p class="mt-3">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+{% endblock %}

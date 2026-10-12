@@ -1,0 +1,25 @@
+{% extends 'main/layoute.html' %}
+
+{% block title %}
+    <title>Новости</title>
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Новости {{ caption }}</h2>
+
+{% for post in news %}
+<article class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h3 class="card-title h4">{{ post.title }}</h3>
+        <p class="text-secondary small mb-3">
+            Автор: <b>{{ post.author.get_full_name|default:post.author.username }}</b>
+            · {{ post.pub_date|date:"d.m.Y H:i" }}
+        </p>
+        <p class="lead fs-6 fst-italic">{{ post.short_description }}</p>
+        <div class="card-text">{{ post.text|linebreaks }}</div>
+    </div>
+</article>
+{% empty %}
+<p class="text-secondary">Новостей пока нет.</p>
+{% endfor %}
+{% endblock %}
